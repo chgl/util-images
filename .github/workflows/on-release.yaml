@@ -26,7 +26,7 @@ jobs:
         run: |
           tag="${{ github.ref_name }}"
 
-          regex="^(.+)-v([\d.]+(-.*)?)$"
+          regex="^(.*)-v([0-9.]*(-.*)?)$"
 
           if [[ $tag =~ $regex ]]; then
               component_name="${BASH_REMATCH[1]}"
@@ -34,8 +34,8 @@ jobs:
               echo "Component Name: $component_name"
               echo "Version: $version"
 
-              echo "component=$component_name" >> $GITHUB_OUTPUT
-              echo "version=$version" >> $GITHUB_OUTPUT
+              echo "component=$component_name" >>$GITHUB_OUTPUT
+              echo "version=$version" >>$GITHUB_OUTPUT
           else
               echo "tag format does not match."
               exit 1
