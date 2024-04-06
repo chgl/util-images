@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - id: get-component
-        shell: /bin/bash
+        shell: bash
         run: |
           tag="${{ github.ref_name }}"
 
