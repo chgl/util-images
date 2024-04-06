@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/chgl/util-images/compare/spark-delta-v1.4.0...spark-delta-v1.5.0) (2024-04-06)
+
+
+### Features
+
+* more changes ([7cb4f20](https://github.com/chgl/util-images/commit/7cb4f20350a1b6794f6b549728d64421fe8abb38))
+
 ## [1.4.0](https://github.com/chgl/util-images/compare/spark-delta-v1.3.0...spark-delta-v1.4.0) (2024-04-06)
 
 
