@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "draft": false,
+  "prerelease": false,
+  "packages": {
+    "images/spark-delta": {
+      "component": "spark-delta",
+      "release-type": "simple"
+    },
+    "images/kyuubi-delta": {
+      "component": "kyuubi-delta",
+      "release-type": "simple"
+    }
+  }
+}

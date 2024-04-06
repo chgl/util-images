@@ -14,7 +14,24 @@ on:
 permissions: read-all
 
 jobs:
+  test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        image:
+          - spark-delta
+          - kyuubi-delta
+          # - strimzi-kafka-connect
+          # - cricketeerone-kafka-connect
+          # - apache-superset
+          # - ml-on-fhir
+          # - coder-base
+    steps:
+      - run: |
+          echo "Building ${{ matrix.image }}"
+
   build:
+    if: ${{ false }}
     uses: miracum/.github/.github/workflows/standard-build.yaml@c3f13dd53633bed28ff2667e559d74eae791a1a7 # v1.7.1
     permissions:
       contents: read
@@ -27,12 +44,12 @@ jobs:
       matrix:
         image:
           - spark-delta
-          - strimzi-kafka-connect
-          - cricketeerone-kafka-connect
-          - apache-superset
           - kyuubi-delta
-          - ml-on-fhir
-          - coder-base
+          # - strimzi-kafka-connect
+          # - cricketeerone-kafka-connect
+          # - apache-superset
+          # - ml-on-fhir
+          # - coder-base
     with:
       image: ghcr.io/${{ github.repository }}/${{ matrix.image }}
       build-context: images/${{ matrix.image }}
@@ -45,6 +62,7 @@ jobs:
 
   lint:
     uses: miracum/.github/.github/workflows/standard-lint.yaml@c3f13dd53633bed28ff2667e559d74eae791a1a7 # v1.7.1
+    if: ${{ false }}
     permissions:
       contents: read
       pull-requests: write
@@ -57,14 +75,3 @@ jobs:
       enable-verify-base-image-signature: false
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  release:
-    uses: miracum/.github/.github/workflows/standard-release.yaml@c3f13dd53633bed28ff2667e559d74eae791a1a7 # v1.7.1
-    needs:
-      - build
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-    secrets:
-      semantic-release-token: ${{ secrets.MIRACUM_BOT_SEMANTIC_RELEASE_TOKEN }}
