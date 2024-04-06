@@ -4,12 +4,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      - master
-  release:
-    types:
-      - created
 
 permissions: read-all
 
@@ -29,6 +23,7 @@ jobs:
     steps:
       - run: |
           echo "Building ${{ matrix.image }}"
+          echo "${{ github.event }}"
 
   build:
     if: ${{ false }}

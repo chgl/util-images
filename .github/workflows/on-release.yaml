@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  release:
+    types:
+      - created
+
+permissions: read-all
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: |
+          echo "On release Building"
+          echo "${{ github.ref_name }}"
+          echo "${{ github.event }}"
+          echo "${{ github.event.release }}"
+          echo "${{ github.event.release.tag_name }}"
+
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - id: get-component
+        shell: /bin/bash
+        run: |
+          tag="${{ github.ref_name }}"
+
+          regex="^(.+)-v([\d.]+(-.*)?)$"
+
+          if [[ $tag =~ $regex ]]; then
+              component_name="${BASH_REMATCH[1]}"
+              version="${BASH_REMATCH[2]}"
+              echo "Component Name: $component_name"
+              echo "Version: $version"
+
+              echo "component=$component_name" >> $GITHUB_OUTPUT
+              echo "version=$version" >> $GITHUB_OUTPUT
+          else
+              echo "tag format does not match."
+              exit 1
+          fi
+      - run: |
+          echo "Building image in images/${{ steps.get-component.outputs.component }} tagged as ${{ steps.get-component.outputs.version }}"
+          echo "${{ steps.get-component.outputs.component }}"
+          echo "${{ steps.get-component.outputs.version }}"
