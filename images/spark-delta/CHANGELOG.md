@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/chgl/util-images/compare/spark-delta-v1.5.0...spark-delta-v1.5.1) (2024-04-06)
+
+
+### Bug Fixes
+
+* regex ([818178f](https://github.com/chgl/util-images/commit/818178f40504aaaea6ea77404c089b8393e0f0b4))
+
 ## [1.5.0](https://github.com/chgl/util-images/compare/spark-delta-v1.4.0...spark-delta-v1.5.0) (2024-04-06)
 
 
